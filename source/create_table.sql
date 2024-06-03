@@ -38,7 +38,7 @@ CREATE TABLE carts(
 	cust_ID integer NOT NULL
 );
 
-CREATE TABLE cart_prduct(
+CREATE TABLE cart_product(
 	cart_ID integer NOT NULL,
 	prod_ID integer NOT NULL,
 	quantity integer
