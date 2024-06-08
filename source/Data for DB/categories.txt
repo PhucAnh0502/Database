@@ -1,0 +1,68 @@
+1	Mobile Phones	Smartphones and accessories
+2	Laptops & Computers	Laptops, desktops, and peripherals
+3	Cameras & Photography	Cameras, lenses, and accessories
+4	Audio & Headphones	Speakers, headphones, and audio gear
+5	Wearable Technology	Smartwatches and fitness trackers
+6	Smart Home Devices	Home automation and smart gadgets
+7	Accessories & Peripherals	Chargers, cables, and cases
+8	Men's Clothing	Apparel for men
+9	Women's Clothing	Apparel for women
+10	Kids' Clothing	Apparel for children
+11	Footwear	Shoes and footwear for all ages
+12	Accessories (Bags, Jewelry, Watches)	Fashion accessories
+13	Activewear	Athletic clothing and gear
+14	Furniture	Home and office furniture
+15	Home Decor	Decorative items for home
+16	Bedding & Bath	Bedding and bathroom essentials
+17	Kitchen & Dining	Cookware, tableware, and utensils
+18	Appliances	Home and kitchen appliances
+19	Storage & Organization	Storage solutions and organizers
+20	Skincare	Skincare products
+21	Haircare	Hair care products and tools
+22	Makeup	Makeup and cosmetic products
+23	Personal Care	Personal hygiene and care items
+24	Health & Wellness	Health supplements and wellness products
+25	Fragrances	Perfumes and colognes
+26	Fresh Produce	Fresh fruits and vegetables
+27	Pantry Staples	Essential pantry items
+28	Beverages	Drinks and beverages
+29	Snacks	Snack foods
+30	Dairy & Eggs	Dairy products and eggs
+31	Meat & Seafood	Fresh and frozen meats, seafood
+32	Action Figures & Dolls	Action figures and dolls
+33	Educational Toys	Learning toys for kids
+34	Board Games	Board games and tabletop games
+35	Outdoor Play	Outdoor toys and play equipment
+36	Puzzles	Puzzles and brainteasers
+37	Fitness Equipment	Exercise machines and gear
+38	Outdoor Gear	Equipment for outdoor activities
+39	Sports Apparel	Clothing for sports and workouts
+40	Camping & Hiking	Camping and hiking equipment
+41	Bicycles & Accessories	Bicycles and cycling gear
+42	Car Accessories	Accessories for cars
+43	Motorcycle Gear	Gear and accessories for motorcycles
+44	Tools & Equipment	Automotive tools and equipment
+45	Car Electronics	Car audio and electronic systems
+46	Books	Various genres of books
+47	Music	Music CDs and records
+48	Movies & TV	DVDs and Blu-rays
+49	Magazines	Print and digital magazines
+50	Video Games	Console and PC video games
+51	Stationery	Office and school stationery
+52	Office Furniture	Furniture for office use
+53	Printers & Ink	Printers and ink cartridges
+54	Office Electronics	Office electronic devices
+55	Baby Clothing	Clothing for babies
+56	Feeding & Nursing	Baby feeding and nursing products
+57	Diapers & Potty Training	Diapers and potty training supplies
+58	Nursery Furniture	Furniture for baby's room
+59	Baby Toys	Toys for babies
+60	Dog Supplies	Supplies for dogs
+61	Cat Supplies	Supplies for cats
+62	Fish & Aquatic Pets	Supplies for fish and aquatic pets
+63	Small Animal Supplies	Supplies for small pets
+64	Bird Supplies	Supplies for birds
+65	Fine Jewelry	High-quality jewelry
+66	Fashion Jewelry	Trendy and affordable jewelry
+67	Watches	Wristwatches and timepieces
+68	Engagement & Wedding	Engagement and wedding rings
