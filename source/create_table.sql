@@ -4,7 +4,7 @@ CREATE TABLE personal_info (
 	first_name varchar(20),
 	last_name varchar(20),
 	email varchar(50),
-	phone_number varchar(15),
+	phone_number varchar(30),
 	address varchar(50),
 	city varchar(30),
 	postal_code varchar(20)
@@ -13,15 +13,15 @@ CREATE TABLE personal_info (
 CREATE TABLE customers(
 	cust_ID integer NOT NULL,
 	personal_ID integer NOT NULL,
-	username varchar(20),
-	password varchar(20)
+	username varchar(40),
+	password varchar(40)
 );
 
 CREATE TABLE sellers(
 	seller_ID integer NOT NULL,
 	personal_ID integer NOT NULL,
-	username varchar(20),
-	password varchar(20),
+	username varchar(40),
+	password varchar(40),
 	shop_name varchar(50),
 	business_lisence varchar(200)
 );
