@@ -51,7 +51,7 @@ CREATE TABLE categories(
 );
 
 CREATE TABLE orders(
-	order_ID integer NOT NULL,
+	order_ID serial,
 	cust_ID integer NOT NULL,
 	order_date date,
 	payment_type varchar(30),
