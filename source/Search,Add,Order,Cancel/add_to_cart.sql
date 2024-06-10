@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION add_to_cart(customer_id int, product_name text, prod_quantity int)
+CREATE OR REPLACE FUNCTION add_to_cart(customer_id int, product_id name, prod_quantity int)
 RETURNS TABLE(cart_id int, cust_id int, prod_name text, quantity int) AS $$
 DECLARE
     v_cart_id int;
@@ -8,7 +8,7 @@ BEGIN
     -- Check if the product exists and get the product ID
     SELECT prod_id INTO v_prod_id
     FROM products p
-    WHERE p.prod_name = product_name;
+    WHERE p.prod_id = product_id;
 
     -- Check if the customer has an existing cart
     SELECT carts.cart_id INTO v_cart_id
