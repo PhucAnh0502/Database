@@ -1,5 +1,5 @@
 CREATE TABLE personal_info (
-	personal_ID integer NOT NULL,
+	personal_ID serial,
 	admin_ID integer NOT NULL,
 	first_name varchar(20),
 	last_name varchar(20),
@@ -11,14 +11,14 @@ CREATE TABLE personal_info (
 );
 
 CREATE TABLE customers(
-	cust_ID integer NOT NULL,
+	cust_ID serial,
 	personal_ID integer NOT NULL,
 	username varchar(40),
 	password varchar(40)
 );
 
 CREATE TABLE sellers(
-	seller_ID integer NOT NULL,
+	seller_ID serial,
 	personal_ID integer NOT NULL,
 	username varchar(40),
 	password varchar(40),
@@ -27,14 +27,14 @@ CREATE TABLE sellers(
 );
 
 CREATE TABLE admins(
-	admin_ID integer NOT NULL,
+	admin_ID serial,
 	admin_fname varchar(20),
 	admin_lname varchar(20),
 	password varchar(20)
 );
 
 CREATE TABLE carts(
-	cart_ID integer NOT NULL,
+	cart_ID serial,
 	cust_ID integer NOT NULL
 );
 
@@ -45,7 +45,7 @@ CREATE TABLE cart_product(
 );
 
 CREATE TABLE categories(
-	category_ID integer NOT NULL,
+	category_ID serial,
 	category_name varchar(50),
 	description text
 );
@@ -59,7 +59,7 @@ CREATE TABLE orders(
 );
 
 CREATE TABLE order_detail(
-	order_detail_ID integer NOT NULL,
+	order_detail_ID serial,
 	order_ID integer NOT NULL,
 	prod_ID integer NOT NULL,
 	dis_ID integer NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE order_detail(
 );
 
 CREATE TABLE products(
-	prod_ID integer NOT NULL,
+	prod_ID serial,
 	category_ID integer NOT NULL,
 	seller_ID integer NOT NULL,
 	prod_name varchar(50),
@@ -84,7 +84,7 @@ CREATE TABLE comments(
 );
 
 CREATE TABLE discounts(
-	dis_ID integer NOT NULL,
+	dis_ID serial,
 	admin_Id integer NOT NULL,
 	start_date date,
 	end_date date,
