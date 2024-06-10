@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION add_to_cart(customer_id int, product_id name, prod_quantity int)
+CREATE OR REPLACE FUNCTION add_to_cart(customer_id int, product_id int, prod_quantity int)
 RETURNS TABLE(cart_id int, cust_id int, prod_name text, quantity int) AS $$
 DECLARE
     v_cart_id int;
