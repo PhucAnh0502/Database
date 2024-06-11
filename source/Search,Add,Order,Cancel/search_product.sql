@@ -9,14 +9,14 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION search_products_by_category(product_category_name TEXT)
+CREATE OR REPLACE FUNCTION search_products_by_category(product_category_id INT)
 returns table(prod_id INT, prod_name TEXT, category_name TEXT) AS $$
 BEGIN
 	return query
 	select p.prod_id, p.prod_name::text, c.category_name::text
 	from products p
 	join categories c on p.category_id = c.category_id
-	where c.category_name = product_category_name;
+	where c.category_id = product_category_id;
 end;
 $$ LANGUAGE plpgsql;
 
