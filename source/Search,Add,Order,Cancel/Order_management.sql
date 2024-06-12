@@ -41,11 +41,9 @@ BEGIN
             OLD.prod_id, OLD.quantity,
             (SELECT price FROM products WHERE prod_id = OLD.prod_id),
             (SELECT dis_percent FROM discounts WHERE dis_id = OLD.dis_id),
-            'DELETE'
-        );
+            'DELETE');
     END IF;
-
-    RETURN NEW;
+	RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
