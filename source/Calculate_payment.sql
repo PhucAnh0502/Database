@@ -24,6 +24,8 @@ BEGIN
 	SELECT array_agg(discounts.end_date) INTO e_date FROM discounts WHERE dis_id = ANY(d_id);
   	
 	array_size := array_length( _product_IDs, 1);
+	IF array_size is NULL THEN RAISE EXCEPTION 'This customer has 0 product';
+	END IF;
  
     FOR i IN 1..array_size LOOP
         IF s_date[i] < current_date AND current_date < e_date[i] THEN
