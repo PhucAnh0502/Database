@@ -77,6 +77,12 @@ ALTER TABLE IF EXISTS public.comments
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
+ALTER TABLE IF EXISTS public.comments
+    ADD FOREIGN KEY (prod_id)
+    REFERENCES public.products (prod_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
 
 
 ALTER TABLE IF EXISTS public.orders
@@ -133,6 +139,12 @@ ALTER TABLE IF EXISTS public.cart_product
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID
+ALTER TABLE IF EXISTS public.cart_product
+    ADD FOREIGN KEY (cart_id)
+    REFERENCES public.carts (cart_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;	
 
 
 
