@@ -18,7 +18,15 @@ BEGIN
     _admin_ID := FLOOR(RANDOM() * 1000 + 1)::INT;
     
     -- Insert into personal_info and return the generated personal_ID
-    INSERT INTO personal_info (admin_ID, first_name, last_name, email, phone_number, address, city, postal_code)
+    INSERT INTO personal_info (
+		admin_ID, 
+		first_name, 
+		last_name, 
+		email, 
+		phone_number, 
+		address, 
+		city, 
+		postal_code)
     VALUES (
         _admin_ID,
         _first_name,
