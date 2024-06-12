@@ -62,7 +62,7 @@ CREATE TABLE order_detail(
 	order_detail_ID serial,
 	order_ID integer NOT NULL,
 	prod_ID integer NOT NULL,
-	dis_ID integer NOT NULL,
+	dis_ID integer,
 	quantity integer
 );
 
