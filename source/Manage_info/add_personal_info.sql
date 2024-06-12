@@ -24,7 +24,15 @@ BEGIN
    
    	_admin_ID := FLOOR(RANDOM() * 1000 + 1)::INT;
     
-    INSERT INTO personal_info (admin_ID, first_name, last_name, email, phone_number, address, city, postal_code)
+    INSERT INTO personal_info (
+		admin_ID, 
+		first_name, 
+		last_name, 
+		email, 
+		phone_number, 
+		address, 
+		city, 
+		postal_code)
     VALUES (
         _admin_ID,
         _first_name,
@@ -38,7 +46,13 @@ BEGIN
     RETURNING personal_ID INTO _personal_ID;
     
     IF _is_seller THEN
-        INSERT INTO sellers (personal_ID, username, password, shop_name, business_lisence)
+        INSERT INTO sellers (
+			personal_ID, 
+			username, 
+			password, 
+			shop_name, 
+			business_lisence
+		)
         VALUES (
             _personal_ID,
             _username,
