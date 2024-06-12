@@ -79,7 +79,7 @@ ALTER TABLE IF EXISTS public.comments
     NOT VALID;
 ALTER TABLE IF EXISTS public.comments
     ADD FOREIGN KEY (prod_id)
-    REFERENCES e_shop.products (prod_id) MATCH SIMPLE
+    REFERENCES public.products (prod_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
@@ -141,7 +141,7 @@ ALTER TABLE IF EXISTS public.cart_product
         NOT VALID
 ALTER TABLE IF EXISTS public.cart_product
     ADD FOREIGN KEY (cart_id)
-    REFERENCES e_shop.carts (cart_id) MATCH SIMPLE
+    REFERENCES public.carts (cart_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;	
