@@ -1,12 +1,25 @@
-CREATE OR REPLACE FUNCTION order_products(customer_id INT, product_ids INT[], prod_quantities INT[],d_id int, paytype TEXT)
-RETURNS TABLE(cust_id INT, prod_name TEXT, quantity INT, order_date DATE,dis_percent int, payment_type TEXT, payment_date DATE) AS $$
+CREATE OR REPLACE FUNCTION order_products(
+	customer_id INT, 
+	product_ids INT[], 
+	prod_quantities INT[],
+	d_id int, 
+	paytype TEXT)
+RETURNS TABLE(
+	cust_id INT, 
+	prod_name TEXT, 
+	quantity INT, 
+	order_date DATE,
+	dis_percent int, 
+	payment_type TEXT, 
+	payment_date DATE) AS $$
 DECLARE
     o_order_id INT;
     prod_id INT;
     prod_quantity INT;
 BEGIN
     -- Kiểm tra độ dài của mảng product_ids và prod_quantities
-    IF array_length(product_ids, 1) IS DISTINCT FROM array_length(prod_quantities, 1) THEN
+    IF array_length(product_ids, 1) 
+	IS DISTINCT FROM array_length(prod_quantities, 1) THEN
         RAISE EXCEPTION 'Product IDs and quantities must have the same length';
     END IF;
 
@@ -31,7 +44,13 @@ BEGIN
 
     -- Trả về bảng kết quả
     RETURN QUERY
-    SELECT o.cust_id, p.prod_name::text, od.quantity, o.order_date, COALESCE(d.dis_percent, NULL) AS dis_percent,o.payment_type::text, o.payment_date
+    SELECT 	o.cust_id, 
+			p.prod_name::text, 
+			od.quantity, 
+			o.order_date, 
+			COALESCE(d.dis_percent, NULL) AS dis_percent,
+			o.payment_type::text, 
+			o.payment_date
     FROM order_detail od
     JOIN orders o ON o.order_id = od.order_id
     JOIN products p ON p.prod_id = od.prod_id

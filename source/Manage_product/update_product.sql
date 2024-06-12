@@ -12,7 +12,8 @@ DECLARE
     product_exists BOOLEAN;
 BEGIN
     -- Kiểm tra xem productid có tồn tại
-    SELECT EXISTS (SELECT 1 FROM products WHERE prod_id = p_productid) INTO product_exists;
+    SELECT EXISTS (SELECT 1 FROM products 
+	WHERE prod_id = p_productid) INTO product_exists;
     
     -- Nếu productid không tồn tại, trả về thông báo lỗi
     IF NOT product_exists THEN
