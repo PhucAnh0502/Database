@@ -19,6 +19,8 @@ BEGIN
         city = _city,
         postal_code = _postal_code
     WHERE personal_ID = _personal_ID;
+    IF NOT FOUND THEN RAISE EXCEPTION 'This account does not exist'; 
+    END IF;
 END;
 $$ LANGUAGE plpgsql;
 
