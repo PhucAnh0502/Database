@@ -3,6 +3,7 @@ CREATE OR REPLACE FUNCTION add_product(
     p_description TEXT,
     p_productname VARCHAR(100),
     p_sellerid INTEGER,
+	p_discountid INTEGER,
     p_price NUMERIC(10, 2),
     p_image TEXT
 )
@@ -25,8 +26,8 @@ BEGIN
     END IF;
 
     -- Thêm sản phẩm mới nếu categoryid và sellerid hợp lệ
-    INSERT INTO products (category_id, description, prod_name, seller_id, price, picture)
-    VALUES (p_categoryid, p_description, p_productname, p_sellerid, p_price, p_image)
+    INSERT INTO products (category_id, description, prod_name, seller_id, price, picture, dis_id)
+    VALUES (p_categoryid, p_description, p_productname, p_sellerid, p_price, p_image, p_discountid)
     RETURNING prod_id INTO new_productid;
 
     RETURN 'Product added with ID: ' || new_productid;
