@@ -59,10 +59,8 @@ CREATE TABLE orders(
 );
 
 CREATE TABLE order_detail(
-	order_detail_ID serial,
 	order_ID integer NOT NULL,
 	prod_ID integer NOT NULL,
-	dis_ID integer,
 	quantity integer
 );
 
@@ -70,6 +68,7 @@ CREATE TABLE products(
 	prod_ID serial,
 	category_ID integer NOT NULL,
 	seller_ID integer NOT NULL,
+	dis_ID integer NOT NULL,
 	prod_name varchar(50),
 	description text,
 	price integer,
