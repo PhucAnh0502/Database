@@ -1,12 +1,16 @@
 CREATE OR REPLACE FUNCTION update_comment(p_id INT, c_id INT, body TEXT)
 RETURNS TEXT AS $$
 BEGIN
-	UPDATE comments
-	SET comment_date = current_time,
-		content = body
-	WHERE p_id = prod_id AND c_id = cust_id;
-	IF NOT FOUND THEN RAISE EXCEPTION 'This comment does not exist';
-	END IF;
+    UPDATE comments
+    SET comment_date = current_date,
+        content = body
+    WHERE prod_id = p_id AND cust_id = c_id;
+    
+    IF NOT FOUND THEN
+        RETURN 'This comment does not exist';
+    END IF;
+    
+    RETURN 'Comment updated successfully';
 END;
 $$
 LANGUAGE plpgsql;
