@@ -1,39 +1,51 @@
-CREATE OR REPLACE FUNCTION calculate_payment(c_id INT)
-RETURNS FLOAT AS $$
+CREATE OR REPLACE FUNCTION get_order_sums(c_id INT)
+RETURNS TABLE(order_id INT, order_sum FLOAT) AS $$
 DECLARE
-    _product_IDs INT[];
-	o_id INT;
-	d_id INT[];
-	quan INT[];
-	prices INT[];
-	discount_percent INT[];
-	s_date date[];
-	e_date date[];
-	i int;
-    current_date date := CURRENT_DATE;
-    array_size int ;
-    sum float := 0.0;
+    rec RECORD;
+    current_date DATE := CURRENT_DATE;
+    array_size INT;
+    i INT;
+    sum FLOAT;
 BEGIN
-	SELECT order_id INTO o_id FROM orders WHERE c_id=cust_id;
-	SELECT array_agg(order_detail.prod_ID) INTO _product_IDs FROM order_detail WHERE order_ID = o_ID;
-	SELECT array_agg(order_detail.dis_id) INTO d_id FROM order_detail WHERE order_ID = o_ID;
-	SELECT array_agg(order_detail.quantity) INTO quan FROM order_detail WHERE order_ID = o_ID;
-	SELECT array_agg(products.price) INTO prices FROM products WHERE prod_id = ANY(_product_IDs);
-	SELECT array_agg(discounts.dis_percent) INTO discount_percent FROM discounts WHERE dis_id = ANY(d_id);
-	SELECT array_agg(discounts.start_date) INTO s_date FROM discounts WHERE dis_id = ANY(d_id);
-	SELECT array_agg(discounts.end_date) INTO e_date FROM discounts WHERE dis_id = ANY(d_id);
-  	
-	array_size := array_length( _product_IDs, 1);
-	IF array_size is NULL THEN RAISE EXCEPTION 'This customer has 0 product';
-	END IF;
- 
-    FOR i IN 1..array_size LOOP
-        IF s_date[i] < current_date AND current_date < e_date[i] THEN
-            sum := sum + prices[i] * quan[i] * (discount_percent[i]/100.0);
-        ELSE
-            sum := sum + prices[i] * quan[i];
-        END IF;
+    FOR rec IN
+        SELECT 
+            orders.order_id AS o_id,
+            array_agg(order_detail.prod_ID) AS _product_IDs,
+            array_agg(order_detail.dis_id) AS d_id,
+            array_agg(order_detail.quantity) AS quan,
+            array_agg(products.price) AS prices,
+            array_agg(discounts.dis_percent) AS discount_percent,
+            array_agg(discounts.start_date) AS s_date,
+            array_agg(discounts.end_date) AS e_date
+        FROM
+            orders
+        LEFT JOIN
+            order_detail ON orders.order_id = order_detail.order_id
+        LEFT JOIN
+            products ON order_detail.prod_ID = products.prod_id
+        LEFT JOIN
+            discounts ON order_detail.dis_id = discounts.dis_id
+        WHERE
+            orders.cust_id = c_id AND order_detail.prod_ID IS NOT NULL
+        GROUP BY
+            orders.order_id
+    LOOP
+        sum := 0.0;
+        array_size := cardinality(rec._product_IDs);
+
+        FOR i IN 1..array_size LOOP
+            IF rec.s_date[i] IS NOT NULL AND rec.e_date[i] IS NOT NULL AND rec.s_date[i] < current_date AND current_date < rec.e_date[i] THEN
+                sum := sum + rec.prices[i] * rec.quan[i] * (1 - rec.discount_percent[i] / 100.0);
+            ELSE
+                sum := sum + rec.prices[i] * rec.quan[i];
+            END IF;
+        END LOOP;
+
+        order_id := rec.o_id;
+        order_sum := sum;
+
+
+        RETURN NEXT;
     END LOOP;
-    RETURN sum;
 END;
 $$ LANGUAGE plpgsql;
