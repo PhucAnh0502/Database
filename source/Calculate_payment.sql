@@ -11,7 +11,6 @@ BEGIN
         SELECT 
             orders.order_id AS o_id,
             array_agg(order_detail.prod_ID) AS _product_IDs,
-            array_agg(order_detail.dis_id) AS d_id,
             array_agg(order_detail.quantity) AS quan,
             array_agg(products.price) AS prices,
             array_agg(discounts.dis_percent) AS discount_percent,
@@ -24,7 +23,7 @@ BEGIN
         LEFT JOIN
             products ON order_detail.prod_ID = products.prod_id
         LEFT JOIN
-            discounts ON order_detail.dis_id = discounts.dis_id
+            discounts ON products.dis_id = discounts.dis_id
         WHERE
             orders.cust_id = c_id AND order_detail.prod_ID IS NOT NULL
         GROUP BY
@@ -40,11 +39,8 @@ BEGIN
                 sum := sum + rec.prices[i] * rec.quan[i];
             END IF;
         END LOOP;
-
         order_id := rec.o_id;
         order_sum := sum;
-
-
         RETURN NEXT;
     END LOOP;
 END;
