@@ -1,5 +1,5 @@
 CREATE OR REPLACE FUNCTION delete_personal_info(p_id INTEGER)
-RETURNS VOID AS $$
+RETURNS TEXT AS $$
 DECLARE
     _customer_ID INT;
 	_seller_ID INT;
@@ -20,7 +20,9 @@ BEGIN
 	DELETE FROM comments WHERE cust_ID = _customer_ID;
 	DELETE FROM carts WHERE cust_ID = _customer_ID;
 	DELETE FROM personal_info WHERE personal_id = p_id;
+	
+	RETURN 'Account deleted successfully';
 END;
-
 $$ LANGUAGE plpgsql;
+
 select delete_personal_info(10001)
