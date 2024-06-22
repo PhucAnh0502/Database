@@ -5,7 +5,7 @@ CREATE OR REPLACE FUNCTION update_product(
     p_productname VARCHAR(100),
     p_sellerid INTEGER,
     p_price NUMERIC(10, 2),
-    p_image TEXT
+    p_image TEXT,
 	p_disid INTEGER
 )
 RETURNS TEXT AS $$
