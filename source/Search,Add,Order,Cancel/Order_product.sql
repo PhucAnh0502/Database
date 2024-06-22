@@ -8,14 +8,14 @@ RETURNS TABLE(
 	prod_name TEXT, 
 	quantity INT, 
 	order_date DATE,
-	dis_percent int, 
+	dis_percent INT, 
 	payment_type TEXT, 
 	payment_date DATE) AS $$
 DECLARE
     o_order_id INT;
-    prod_id INT;
-    prod_quantity INT;
-    dis_id INT;
+    product_id INT;
+    product_quantity INT;
+    o_dis_id INT;
 BEGIN
     -- Kiểm tra độ dài của mảng product_ids và prod_quantities
     IF array_length(product_ids, 1) IS DISTINCT FROM array_length(prod_quantities, 1) THEN
@@ -29,15 +29,12 @@ BEGIN
 
     -- Thêm các sản phẩm vào bảng order_detail
     FOR i IN 1..array_length(product_ids, 1) LOOP
-        prod_id := product_ids[i];
-        prod_quantity := prod_quantities[i];
-
-        -- Lấy dis_id từ bảng products
-        SELECT dis_id INTO dis_id FROM products WHERE prod_id = prod_id;
+        product_id := product_ids[i];
+        product_quantity := prod_quantities[i];
 
         -- Chèn vào bảng order_detail
-        INSERT INTO order_detail (order_id, prod_id, dis_id, quantity)
-        VALUES (o_order_id, prod_id, dis_id, prod_quantity);
+        INSERT INTO order_detail (order_id, prod_id, quantity)
+        VALUES (o_order_id, product_id, product_quantity);
     END LOOP;
 
     -- Trả về bảng kết quả
@@ -52,10 +49,9 @@ BEGIN
     FROM order_detail od
     JOIN orders o ON o.order_id = od.order_id
     JOIN products p ON p.prod_id = od.prod_id
-	JOIN discounts d ON d.dis_id = od.dis_id
+	JOIN discounts d ON d.dis_id = p.dis_id
     WHERE o.cust_id = customer_id
     AND o.order_id = o_order_id;
 END;
 $$ LANGUAGE plpgsql;
-
---SELECT * FROM order_products(702, ARRAY[101, 102, 103], ARRAY[2, 1, 4],6, 'credit_card');
+--SELECT * FROM order_products(702, ARRAY[101, 102, 103], ARRAY[2, 1, 4],'credit_card');
