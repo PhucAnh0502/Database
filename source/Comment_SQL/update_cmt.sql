@@ -1,5 +1,5 @@
 CREATE OR REPLACE FUNCTION update_comment(p_id INT, c_id INT, body TEXT)
-RETURNS VOID AS $$
+RETURNS TEXT AS $$
 BEGIN
 	UPDATE comments
 	SET comment_date = current_time,
