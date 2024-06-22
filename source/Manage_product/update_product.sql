@@ -6,6 +6,7 @@ CREATE OR REPLACE FUNCTION update_product(
     p_sellerid INTEGER,
     p_price NUMERIC(10, 2),
     p_image TEXT
+	p_disid INTEGER
 )
 RETURNS TEXT AS $$
 DECLARE
@@ -28,7 +29,8 @@ BEGIN
         prod_name = COALESCE(p_productname, prod_name),
         seller_id = COALESCE(p_sellerid, seller_id),
         price = COALESCE(p_price, price),
-        picture = COALESCE(p_image, picture)
+        picture = COALESCE(p_image, picture),
+		dis_id = COALESCE(p_disid, dis_id)
     WHERE prod_id = p_productid;
 
     RETURN 'Product updated successfully';
