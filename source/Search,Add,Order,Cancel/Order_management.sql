@@ -20,7 +20,9 @@ BEGIN
             NEW.order_id, (SELECT cust_id FROM orders WHERE order_id = NEW.order_id),
             NEW.prod_id, NEW.quantity,
             (SELECT price FROM products WHERE prod_id = NEW.prod_id),
-            (SELECT dis_percent FROM discounts WHERE dis_id = NEW.dis_id),
+            (SELECT discounts.dis_percent 
+			 FROM discounts JOIN products ON products.dis_id = discounts.dis_id
+			 WHERE prod_id = NEW.prod_id),
             'INSERT'
         );
     ELSIF TG_OP = 'UPDATE' THEN
@@ -30,7 +32,9 @@ BEGIN
             NEW.order_id, (SELECT cust_id FROM orders WHERE order_id = NEW.order_id),
             NEW.prod_id, NEW.quantity,
             (SELECT price FROM products WHERE prod_id = NEW.prod_id),
-            (SELECT dis_percent FROM discounts WHERE dis_id = NEW.dis_id),
+            (SELECT discounts.dis_percent 
+			 FROM discounts JOIN products ON products.dis_id = discounts.dis_id
+			 WHERE prod_id = NEW.prod_id),
             'UPDATE'
         );
     ELSIF TG_OP = 'DELETE' THEN
@@ -40,7 +44,9 @@ BEGIN
             OLD.order_id, (SELECT cust_id FROM orders WHERE order_id = OLD.order_id),
             OLD.prod_id, OLD.quantity,
             (SELECT price FROM products WHERE prod_id = OLD.prod_id),
-            (SELECT dis_percent FROM discounts WHERE dis_id = OLD.dis_id),
+            (SELECT discounts.dis_percent 
+			 FROM discounts JOIN products ON products.dis_id = discounts.dis_id
+			 WHERE prod_id = OLD.prod_id),
             'DELETE');
     END IF;
 	RETURN NEW;
