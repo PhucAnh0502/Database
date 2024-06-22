@@ -66,6 +66,12 @@ ALTER TABLE IF EXISTS public.products
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
+ALTER TABLE IF EXISTS public.products
+    ADD CONSTRAINT products_discount_id_fkey FOREIGN KEY (dis_id)
+    REFERENCES public.discounts (dis_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
 
 
 ALTER TABLE IF EXISTS public.comments
@@ -97,14 +103,8 @@ ALTER TABLE IF EXISTS public.orders
 
 
 ALTER TABLE IF EXISTS public.order_detail
-    ADD CONSTRAINT order_detail_pkey PRIMARY KEY (order_detail_id)
-    INCLUDE (order_detail_id);
-ALTER TABLE IF EXISTS public.order_detail
-    ADD CONSTRAINT order_detail_dis_id_fkey FOREIGN KEY (dis_id)
-    REFERENCES public.discounts (dis_id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
+    ADD CONSTRAINT order_details_pkey PRIMARY KEY (order_id, prod_id)
+    INCLUDE (order_id, prod_id);
 ALTER TABLE IF EXISTS public.order_detail
     ADD CONSTRAINT order_detail_order_id_fkey FOREIGN KEY (order_id)
     REFERENCES public.orders (order_id) MATCH SIMPLE
@@ -117,7 +117,6 @@ ALTER TABLE IF EXISTS public.order_detail
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
-
 
 ALTER TABLE IF EXISTS public.carts
     ADD CONSTRAINT carts_pkey PRIMARY KEY (cart_id)
