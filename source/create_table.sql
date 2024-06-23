@@ -90,3 +90,13 @@ CREATE TABLE discounts(
 	dis_percent integer
 );
 
+CREATE TABLE transaction_history (
+    order_id INT NOT NULL,
+    customer_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT,
+    price NUMERIC(10, 2),
+    discount_percent NUMERIC(5, 2),
+    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    action VARCHAR(50)
+);
