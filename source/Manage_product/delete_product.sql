@@ -12,8 +12,10 @@ BEGIN
     END IF;
 
     -- Xóa sản phẩm nếu productid tồn tại
-    DELETE FROM products WHERE prod_id = p_productid;
-
+	DELETE FROM cart_product WHERE prod_id = p_productid;
+	DELETE FROM comments WHERE prod_id = p_productid;
+	DELETE FROM order_detail WHERE prod_id = p_productid;
+	DELETE FROM products WHERE prod_id = p_productid;
     RETURN 'Product deleted successfully';
 END;
 $$ LANGUAGE plpgsql;
