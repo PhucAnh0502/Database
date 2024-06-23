@@ -1,14 +1,3 @@
-CREATE TABLE transaction_history (
-    history_id SERIAL PRIMARY KEY,
-    order_id INT,
-    customer_id INT,
-    product_id INT,
-    quantity INT,
-    price NUMERIC(10, 2),
-    discount_percent NUMERIC(5, 2),
-    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    action VARCHAR(50)
-);
 
 CREATE OR REPLACE FUNCTION log_transaction_history()
 RETURNS TRIGGER AS $$
