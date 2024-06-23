@@ -26,7 +26,7 @@ BEGIN
 
   
     BEGIN
-		DELETE FROM comments WHERE cust_ID = _customer_ID;
+	DELETE FROM comments WHERE cust_ID = _customer_ID;
         DELETE FROM comments WHERE prod_ID = ANY(_product_IDs);
         
         DELETE FROM order_detail WHERE prod_ID = ANY(_product_IDs);
