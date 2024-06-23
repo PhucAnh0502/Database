@@ -146,6 +146,23 @@ ALTER TABLE IF EXISTS public.cart_product
     NOT VALID;	
 
 
+ALTER TABLE IF EXISTS public.transaction_history
+    ADD CONSTRAINT transaction_pk PRIMARY KEY (order_id,product_id)
+    INCLUDE (order_id,product_id);
+ALTER TABLE IF EXISTS public.transaction_history
+    ADD CONSTRAINT trans_his_order_id_fk FOREIGN KEY (order_id)
+    REFERENCES public.orders(order_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+ALTER TABLE IF EXISTS public.transaction_history
+    ADD CONSTRAINT trans_his_product_id_fk FOREIGN KEY (product_id)
+    REFERENCES public.products(prod_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
 
 
 
